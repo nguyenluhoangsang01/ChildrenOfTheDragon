@@ -1,11 +1,12 @@
 # Sử dụng image Python chính thức
 FROM python:3.12-slim
 
-# Cập nhật và cài đặt các dependencies cần thiết
+# Cài đặt các gói hệ thống cần thiết
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     libtesseract-dev \
     libleptonica-dev \
+    libgl1 \
     poppler-utils \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -13,12 +14,12 @@ RUN apt-get update && apt-get install -y \
 # Tạo thư mục ứng dụng
 WORKDIR /app
 
-# Copy tất cả file vào thư mục làm việc
+# Copy mã nguồn
 COPY . /app
 
-# Cài đặt các gói Python
+# Cài đặt các thư viện Python
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Chạy ứng dụng (sửa lại 'main.py' nếu file của bạn tên khác)
+# Khởi chạy ứng dụng
 CMD ["python", "main.py"]
