@@ -1,0 +1,6 @@
+discord.py
+opencv-python
+pytesseract
+rapidfuzz
+python-dotenv
+flask
