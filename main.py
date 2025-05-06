@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 from rapidfuzz import fuzz
 from typing import List
 from dotenv import load_dotenv
+import platform
 
 load_dotenv()
 
@@ -22,7 +23,10 @@ ADMIN_ROLE_ID = os.getenv("ADMIN_ROLE_ID")
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 # Tesseract path (adjust if needed)
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+else:
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
 GUILD_FILE = "guild_members.json"
 ATTENDANCE_FILE = "attendance_count.json"
