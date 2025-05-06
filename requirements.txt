@@ -4,6 +4,3 @@ pytesseract
 rapidfuzz
 python-dotenv
 flask
-opencv-python-headless
-numpy
-Pillow

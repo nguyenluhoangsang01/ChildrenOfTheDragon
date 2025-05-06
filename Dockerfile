@@ -1,16 +1,13 @@
 FROM python:3.12-slim
 
-# Cài các thư viện hệ thống cần thiết cho OpenCV
-RUN apt-get update && apt-get install -y \
-    libgl1 \
-    libglib2.0-0 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Cài libGL để OpenCV hoạt động
+RUN apt-get update && apt-get install -y libgl1
 
+# Copy code vào container
 WORKDIR /app
-
 COPY . /app
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Cài Python dependencies
+RUN pip install -r requirements.txt
 
 CMD ["python", "main.py"]
